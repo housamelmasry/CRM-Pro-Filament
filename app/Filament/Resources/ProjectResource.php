@@ -7,9 +7,13 @@ use Filament\Tables;
 use App\Models\Project;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
-use App\Filament\Resources\ProjectResource\Pages;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use App\Filament\Resources\ProjectResource\Pages;
 
 class ProjectResource extends Resource
 {
@@ -105,10 +109,10 @@ class ProjectResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('start_Date')
-                    ->dateTime()
+                    ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end_Date')
-                    ->dateTime()
+                    ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('priority')
                     ->searchable()
@@ -164,6 +168,55 @@ class ProjectResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+
+                Section::make('Project INFO')
+                    ->description('project info')
+                    ->schema([
+                        TextEntry::make('title')->columnSpan(1)
+                            ->label('Project title'),
+                        TextEntry::make('user.name'),
+                        TextEntry::make('client.name'),
+                        TextEntry::make('description')
+                            ->columnSpan(2),
+                        TextEntry::make('start_Date')->date(),
+                        TextEntry::make('end_Date')->date(),
+                        TextEntry::make('priority')
+                            ->badge()
+                            ->color(fn (string $state): string => match ($state) {
+                                'high' => 'danger',
+                                'medium' => 'warning',
+                                'low' => 'info',
+                            }),
+                        TextEntry::make('status')
+                            ->badge()
+                            ->color(fn (string $state): string => match ($state) {
+                                'todo' => 'gray',
+                                'progress' => 'info',
+                                'done' => 'success',
+                            }),
+                    ])->columnSpan(1),
+                Section::make('Project Details')
+                    ->description('Project Details')
+                    ->schema([
+                        TextEntry::make('location'),
+                        TextEntry::make('type'),
+                        TextEntry::make('department.name'),
+                        TextEntry::make('created_at'),
+                        TextEntry::make('updated_at'),
+                    ])->columnSpan(1),
+                Section::make('Media')
+                    ->description('Images used in the page layout.')
+                    ->schema([
+                        // ...
+                    ]),
+                // TextEntry::getDescriptionBelow('description'),
             ]);
     }
 

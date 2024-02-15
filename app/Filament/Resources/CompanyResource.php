@@ -11,9 +11,11 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\CompanyResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CompanyResource\RelationManagers;
@@ -179,6 +181,38 @@ class CompanyResource extends Resource
                 ]),
             ]);
     }
+
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                TextEntry::make('name')
+                    ->label('Company name'),
+                TextEntry::make('user.name'),
+                // TextEntry::make('client.name'),
+                TextEntry::make('size'),
+                TextEntry::make('type_of_Business'),
+                TextEntry::make('country.name'),
+                TextEntry::make('city.name'),
+                TextEntry::make('phone'),
+                TextEntry::make('email'),
+                TextEntry::make('website'),
+                TextEntry::make('slogan'),
+                TextEntry::make('about_us'),
+                TextEntry::make('mission'),
+                TextEntry::make('vision'),
+                TextEntry::make('description'),
+                TextEntry::make('location'),
+                TextEntry::make('type'),
+                TextEntry::make('department.name'),
+                TextEntry::make('created_at'),
+                TextEntry::make('updated_at'),
+                // TextEntry::getDescriptionBelow('description'),
+            ]);
+    }
+
+
 
     public static function getRelations(): array
     {

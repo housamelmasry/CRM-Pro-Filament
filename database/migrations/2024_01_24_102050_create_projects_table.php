@@ -18,18 +18,15 @@ return new class extends Migration
             $table->dateTime('start_Date');
             $table->dateTime('end_Date');
             $table->enum('priority', ['low', 'medium', 'high']);
-            $table->enum('status', [
-                'todo',
-                'progress',
-                'done',
-            ]);
+            $table->enum('status', ['todo','progress','done',]);
             // $table->String('status',5);
             $table->String('location');
             $table->String('type');
             // $table->Bit('photo',100);
-            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete(); //Relationship
-            $table->foreignId('client_id')->constrained()->cascadeOnDelete(); //Relationship
+            $table->foreignId('department_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('client_id')->nullable()->constrained();
+            $table->foreignId('partner_id')->nullable()->constrained();
             // $table->foreignId('company_id')->references('id')->on('companies');//Relationship
             $table->timestamps();
         });

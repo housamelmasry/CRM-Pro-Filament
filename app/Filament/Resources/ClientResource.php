@@ -11,9 +11,11 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\ClientResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ClientResource\RelationManagers;
@@ -125,6 +127,7 @@ class ClientResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Client Name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country.name')
                     ->searchable(),
@@ -158,7 +161,7 @@ class ClientResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -166,6 +169,27 @@ class ClientResource extends Resource
                 ]),
             ]);
     }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                TextEntry::make('user.name')
+                    ->label('User Name'),
+                TextEntry::make('name')
+                    ->label('Client Name'),
+                TextEntry::make('country.name'),
+                TextEntry::make('city.name'),
+                TextEntry::make('phone'),
+                TextEntry::make('email'),
+                TextEntry::make('website'),
+                TextEntry::make('contact_Person'),
+                TextEntry::make('contact_Person_Phone'),
+                TextEntry::make('created_at'),
+                TextEntry::make('updated_at'),
+
+            ]);
+}
 
     public static function getRelations(): array
     {
