@@ -33,14 +33,17 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-cog-6-tooth')
                     ->url('/app')
             ])
-            ->colors([
-            'danger' => Color::Rose,
-            'gray' => Color::Gray,
-            'info' => Color::Blue,
-            'primary' => Color::Indigo,
-            'success' => Color::Emerald,
-            'warning' => Color::Orange,
-            ])
+            // ->profile('admin')
+            // ->colors([
+            // 'danger' => Color::Red,
+            // 'gray' => Color::hex('#dcdcdc'),
+            // // 'gray' => Color::Amber,
+            // 'info' => Color::Blue,
+            // 'primary' => Color::Yellow,
+            // 'success' => Color::Emerald,
+            // 'warning' => Color::Orange,
+            // // 'background' => Color::Amber,
+            // ])
             ->font('PT Sans Narrow')
             ->navigationGroups([
                 'Employee Management',

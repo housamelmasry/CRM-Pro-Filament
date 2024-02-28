@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Team;
 use App\Models\User;
+use Doctrine\DBAL\Schema\Column;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
@@ -17,6 +18,7 @@ class StatesAdminOverview extends BaseWidget
             Stat::make('Users', User::query()->count())
                 ->description('All users from this application')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->icon('heroicon-o-users')
                 ->chart([7, 30, 10, 3, 15, 4, 17, 44])
                 ->color('success'),
             Stat::make('Departments', Department::query()->count())
@@ -30,7 +32,20 @@ class StatesAdminOverview extends BaseWidget
                 ->descriptionIcon('heroicon-m-arrow-trending-down')
                 ->descriptionColor('danger')
                 ->chart([7, 2, 10, 70, 15, 4, 17, 12])
+                
                 ->color('danger'),
+            Stat::make('Employees', Employee::query()->count())
+                ->description('All Employee in this application')
+                ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->descriptionColor('success')
+                ->chart([7, 2, 10, 3, 15, 4, 17, 33])
+                ->color('success'),
+            Stat::make('Employees', Employee::query()->count())
+                ->description('All Employee in this application')
+                ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->descriptionColor('success')
+                ->chart([7, 2, 10, 3, 15, 4, 17, 33])
+                ->color('success'),
             Stat::make('Employees', Employee::query()->count())
                 ->description('All Employee in this application')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
