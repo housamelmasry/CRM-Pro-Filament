@@ -30,7 +30,7 @@ class State extends Model
     {
         return $this->hasMany(Employee::class);
     }
-    
+
     public function client(): HasMany
     {
         return $this->hasMany(Client::class);

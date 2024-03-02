@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();//Relationship
             $table->String('name',45);
             // $table->String('end_User',45)->nullable();
             $table->foreignId('country_id')->constrained()->cascadeOnDelete();
@@ -24,10 +24,11 @@ return new class extends Migration
             $table->String('contact_Person',45)->nullable();
             $table->String('contact_Person_Phone',45)->nullable();
             // $table->String('status',10)->nullable();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();//Relationship
             // $table->foreignId('parent_id')->nullable()->constrained('clients','id') ->nullOnDelete();
             // $table->foreignId('company_id')->references('id')->on('companies')->cascadeOnUpdate()->cascadeOnDelete();//Relationship
             $table->timestamps();
+
+            $table->primary('user_id');
         });
     }
 

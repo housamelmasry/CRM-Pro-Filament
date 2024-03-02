@@ -13,9 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('profiles', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            // $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->date('date_of_birth');
             $table->string('address');
             $table->foreignId('country_id')->constrained('countries');
@@ -23,6 +21,9 @@ return new class extends Migration
             $table->foreignId('city_id')->constrained('cities');
             $table->string('avatar');
             $table->timestamps();
+
+            $table->primary('user_id');
+
         });
     }
 

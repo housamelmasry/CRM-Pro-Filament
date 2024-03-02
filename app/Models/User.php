@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable implements HasTenants
 {
@@ -30,6 +31,8 @@ class User extends Authenticatable implements HasTenants
         'password',
         'is_admin',
     ];
+
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -74,6 +77,17 @@ class User extends Authenticatable implements HasTenants
     public function company():HasMany
     {
         return $this->hasMany(Company::class , 'added_by');
+    }
+
+    // public function profile():HasOne
+    // {
+    //     return $this->hasOne(Profile::class , 'user_id');
+    // }
+
+    public function employee():HasOne
+    {
+        return $this->hasOne(Employee::class , 'user_id' , 'id')
+            ->withDefault();
     }
 
 

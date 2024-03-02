@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('partners', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('type_of_business');
             $table->string('country');
@@ -41,6 +41,9 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->primary('user_id');
+
         });
     }
 

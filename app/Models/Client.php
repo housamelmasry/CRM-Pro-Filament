@@ -25,6 +25,11 @@ class Client extends Model
         'user_id',
     ];
 
+    protected $guarded = [];
+
+
+    protected $primaryKey = 'user_id';
+
 
 
     public function project(): HasMany
@@ -34,7 +39,8 @@ class Client extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'user_id' , 'id')
+            ->withDefault();
     }
 
     public function country(): BelongsTo
