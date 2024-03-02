@@ -38,7 +38,6 @@ return new class extends Migration
             $table->string('mission');
             $table->string('vision');
             $table->enum('status' , ['active' , 'inactive'])->default('active');
-            $table->foreignId('project_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
 

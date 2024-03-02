@@ -33,10 +33,10 @@ class Project extends Model
     // {
     //     return $this->belongsToMany(Client::class);
     // }
-    public function getStatuses(): Collection
-    {
-        return StatusEnum::statuses();
-    }
+    // public function getStatuses(): Collection
+    // {
+    //     return StatusEnum::statuses();
+    // }
 
 
     public function user(): BelongsTo
@@ -63,6 +63,12 @@ class Project extends Model
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
+    }
+
+
+    public function partner(): BelongsTo
+    {
+        return $this->belongsTo(Partner::class);
     }
 
 

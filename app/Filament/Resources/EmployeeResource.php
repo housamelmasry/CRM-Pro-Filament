@@ -85,6 +85,12 @@ class EmployeeResource extends Resource
                 Forms\Components\Section::make('User Name')
                     // ->description('Put the user name details in.')
                     ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->relationship(name: 'user', titleAttribute: 'name')
+                            ->native(false)
+                            ->searchable()
+                            ->preload()
+                            ->required(),
                         Forms\Components\TextInput::make('first_name')
                             ->required()
                             ->hiddenLabel()
@@ -100,7 +106,7 @@ class EmployeeResource extends Resource
                             ->hiddenLabel()
                             ->placeholder('Last Name')
                             ->maxLength(255),
-                    ])->columns(3),
+                    ])->columns(2),
                 // end user information section
 
 
@@ -121,9 +127,13 @@ class EmployeeResource extends Resource
                 Forms\Components\Section::make('Dates')
                     ->schema([
                         Forms\Components\DatePicker::make('date_of_birth')
+                            ->minDate('1990-01-01')
+                            ->maxDate(now()->subYears(18)->format('Y-m-d'))
                             ->required()
                             ->native(false),
                         Forms\Components\DatePicker::make('date_hired')
+                            ->minDate('2020-01-01')
+                            ->maxDate(now())
                             ->required()
                             ->native(false),
                     ])->columns(2),

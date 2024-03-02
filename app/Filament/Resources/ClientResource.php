@@ -26,7 +26,7 @@ class ClientResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Clients';
+    protected static ?string $navigationGroup = 'Projects Management';
 
     public static function getNavigationBadge(): ?string
     {
@@ -48,6 +48,12 @@ class ClientResource extends Resource
                 // Forms\Components\TextInput::make('added_by')
                 //     ->nullable()
                 //     ->numeric(),
+                Forms\Components\Select::make('user_id')
+                    ->relationship(name: 'user', titleAttribute: 'name')
+                    ->native(false)
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->label('Client Name')
                     ->required()
@@ -189,7 +195,7 @@ class ClientResource extends Resource
                 TextEntry::make('updated_at'),
 
             ]);
-}
+    }
 
     public static function getRelations(): array
     {

@@ -21,7 +21,7 @@ class ProjectResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Clients';
+    protected static ?string $navigationGroup = 'Projects Management';
 
     public static function getNavigationBadge(): ?string
     {
@@ -40,11 +40,21 @@ class ProjectResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
+                Forms\Components\Select::make('employee_id')
                     ->relationship('user', 'name')
+                    ->label('Project Manager')
+                    ->native(false),
+                Forms\Components\Select::make('department_id')
+                    ->relationship('department', 'name')
+                    ->label('Department')
+                    ->native(false),
+                Forms\Components\Select::make('partner_id')
+                    ->relationship('partner', 'name')
+                    ->label('Partner')
                     ->native(false),
                 Forms\Components\Select::make('client_id')
                     ->relationship('client', 'name')
+                    ->label('Client')
                     ->native(false),
                 // Forms\Components\TextInput::make('client_id')
                 //     ->nullable()

@@ -19,15 +19,12 @@ return new class extends Migration
             $table->dateTime('end_Date');
             $table->enum('priority', ['low', 'medium', 'high']);
             $table->enum('status', ['todo','progress','done',]);
-            // $table->String('status',5);
             $table->String('location');
             $table->String('type');
-            // $table->Bit('photo',100);
             $table->foreignId('department_id')->nullable()->constrained();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->foreignId('client_id')->nullable()->constrained();
-            $table->foreignId('partner_id')->nullable()->constrained();
-            // $table->foreignId('company_id')->references('id')->on('companies');//Relationship
+            $table->foreignId('employee_id')->references('user_id')->on('clients')->onDelete('cascade');
+            $table->foreignId('client_id')->references('user_id')->on('clients')->onDelete('cascade');
+            $table->foreignId('partner_id')->references('user_id')->on('partners')->onDelete('cascade');
             $table->timestamps();
         });
     }

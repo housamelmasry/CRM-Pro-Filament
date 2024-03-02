@@ -28,7 +28,7 @@ class StateResource extends Resource
 
     protected static ?string $modelLabel = 'State';
 
-    protected static ?string $navigationGroup = 'System Management';
+    protected static ?string $navigationGroup = 'Global System';
 
     protected static ?int $navigationSort = 2;
 
